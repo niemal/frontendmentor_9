@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useContext, useRef } from "react";
+import { useContext, useRef, useEffect } from "react";
 import { MainContext } from "../MainBody";
 import { QUERIES } from "../constants";
 
@@ -94,6 +94,10 @@ function Input() {
 
     setLoading(false);
   };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <Wrapper>
