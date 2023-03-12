@@ -4,11 +4,27 @@ import { useContext } from "react";
 import { MainContext } from "../MainBody";
 import Loader from "../Loader";
 
+import iconMarker from "./icon-location.svg";
+import iconRetina from "./icon-location.svg";
+import iconShadow from "leaflet/dist/images/marker-shadow.png";
+
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: iconRetina,
+  iconUrl: iconMarker,
+  shadowUrl: iconShadow,
+});
+
 const Wrapper = styled.div`
-  height: 100%;
-  width: 100%;
-  display: grid;
-  place-content: center;
+  & > div {
+    min-height: calc(100vh - 260px);
+    width: 100%;
+    z-index: 4;
+  }
 `;
 
 const Icon = styled.img`
@@ -20,14 +36,14 @@ const Icon = styled.img`
 function Map() {
   const { data, loading } = useContext(MainContext);
 
-  if (loading || !data.lng || !data.lat) {
+  if (loading || !data?.lng || !data?.lat) {
     return null;
   }
 
   return (
     <Wrapper>
       <MapContainer
-        center={[data.lng, data.lat]}
+        center={[data.lat, data.lng]}
         zoom={13}
         scrollWheelZoom={false}
       >
@@ -35,7 +51,7 @@ function Map() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Marker position={[data.lng, data.lat]}>
+        <Marker position={[data.lat, data.lng]}>
           <Icon
             src={"/frontendmentor_9/icon-location.svg"}
             alt={"map location icon"}

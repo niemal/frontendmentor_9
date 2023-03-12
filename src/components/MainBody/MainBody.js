@@ -4,6 +4,7 @@ import Input from "../Input";
 import ResultCard from "../ResultCard";
 import Map from "../Map";
 import { createContext, useState } from "react";
+import { QUERIES } from "../constants";
 
 const Wrapper = styled.main`
   min-height: 100vh;
@@ -36,6 +37,11 @@ const InputContainer = styled.div`
   justify-content: center;
   z-index: 3;
   padding: 24px;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    gap: 12px;
+    padding: 12px;
+  }
 `;
 
 const InputTitle = styled.h1`

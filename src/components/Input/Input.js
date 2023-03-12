@@ -1,9 +1,15 @@
 import styled from "styled-components";
 import { useContext, useRef } from "react";
 import { MainContext } from "../MainBody";
+import { QUERIES } from "../constants";
 
 const Wrapper = styled.div`
   display: flex;
+
+  @media ${QUERIES.phoneAndSmaller} {
+    width: 100%;
+    justify-content: center;
+  }
 `;
 
 const InputComponent = styled.input`
@@ -13,10 +19,17 @@ const InputComponent = styled.input`
   border: none;
   border-radius: 16px 0px 0px 16px;
   color: black;
+  font-family: var(--font-primary);
   font-size: ${18 / 16}rem;
 
   &::placeholder {
     color: var(--color-dark-gray);
+  }
+
+  @media ${QUERIES.phoneAndSmaller} {
+    width: 81%;
+    font-size: ${16 / 16}rem;
+    padding: 8px 16px;
   }
 `;
 
@@ -70,8 +83,12 @@ function Input() {
       } else {
         const geoJson = await geoResp.json();
 
-        setData({ ...json, lat: geoJson.latt, lng: geoJson.longt });
-        console.log(geoJson);
+        if (geoJson.error) {
+          console.log("geo error#2:", geoJson);
+        } else {
+          setData({ ...json, lat: geoJson.latt, lng: geoJson.longt });
+          console.log(geoJson);
+        }
       }
     }
 
