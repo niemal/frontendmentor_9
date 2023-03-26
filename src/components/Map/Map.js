@@ -41,7 +41,9 @@ function Map() {
   }
 
   return (
-    <Wrapper>
+    <Wrapper
+      aria-label={"Map pointing out to the search result, powered by Leaflet"}
+    >
       <MapContainer
         center={[data.lat, data.lng]}
         zoom={13}

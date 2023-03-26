@@ -105,7 +105,7 @@ function ResultCard() {
     <Wrapper loading={loading}>
       {loading ? <Loader /> : ""}
       {data && !loading ? (
-        <InnerWrapper>
+        <InnerWrapper aria-label={"search result details"}>
           <EntryWrapper isBordered={true}>
             <EntryTitle>IP ADDRESS</EntryTitle>
             <EntryValue>{data.ip}</EntryValue>

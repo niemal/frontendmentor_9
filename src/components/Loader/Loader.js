@@ -42,7 +42,7 @@ const Wrapper = styled.div`
 
 function Loader() {
   return (
-    <Outer>
+    <Outer aria-label={"loading icon"}>
       <Wrapper />
     </Outer>
   );

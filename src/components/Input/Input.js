@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useContext, useRef, useEffect } from "react";
 import { MainContext } from "../MainBody";
 import { QUERIES } from "../constants";
+import ClickableWrapper from "../ClickableWrapper";
 
 const Wrapper = styled.div`
   display: flex;
@@ -26,6 +27,12 @@ const InputComponent = styled.input`
     color: var(--color-dark-gray);
   }
 
+  transition: all 0.3s ease-in-out;
+  &:focus {
+    outline: 3px solid var(--color-very-dark-gray);
+    outline-offset: 6px;
+  }
+
   @media ${QUERIES.phoneAndSmaller} {
     width: 81%;
     font-size: ${16 / 16}rem;
@@ -33,11 +40,17 @@ const InputComponent = styled.input`
   }
 `;
 
-const Button = styled.div`
+const Button = styled.button`
   background-color: black;
   cursor: pointer;
   padding: 12px 24px;
   border-radius: 0px 16px 16px 0px;
+  transition: all 0.3s ease-in-out;
+
+  &:focus {
+    outline: 3px solid var(--color-very-dark-gray);
+    outline-offset: 4px;
+  }
 `;
 
 const Image = styled.img`
@@ -102,6 +115,7 @@ function Input() {
   return (
     <Wrapper>
       <InputComponent
+        aria-label={"Search input for any IP address or domain"}
         ref={inputRef}
         placeholder={"Search for any IP address or domain"}
         onKeyUp={(e) => {
@@ -110,16 +124,19 @@ function Input() {
           }
         }}
       />
-      <Button
+
+      <ClickableWrapper
         onClick={() => {
           fetchData();
         }}
       >
-        <Image
-          src={"/frontendmentor_9/icon-arrow.svg"}
-          alt={"search button image"}
-        />
-      </Button>
+        <Button>
+          <Image
+            src={"/frontendmentor_9/icon-arrow.svg"}
+            alt={"search image button"}
+          />
+        </Button>
+      </ClickableWrapper>
     </Wrapper>
   );
 }
